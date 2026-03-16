@@ -32,13 +32,15 @@ class Tree {
   includes(value) {
     let current = this.root;
 
-    while(current) {
+    while (current) {
       if (current.data === value) return true;
       current = (current.data > value) ? current.left : current.right;
     }
 
     return false;
   }
+
+  insert(value) {}
 }
 
 export default Tree;
