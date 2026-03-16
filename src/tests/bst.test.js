@@ -56,3 +56,28 @@ describe("insert method", () => {
     expect(tree.includes(value)).toBe(true);
   })
 })
+
+describe.only("deleteItem method", () => {
+  test.skip("value already exists!", () => {});
+  test("deletion of the smallest node value", () => {
+    const value = 1;
+
+    expect(tree.includes(value)).toBe(true);
+    tree.deleteItem(value);
+    expect(tree.includes(value)).toBe(false);
+  })
+  test("deletion of the middle node value", () => {
+    const value = 6;
+
+    expect(tree.includes(value)).toBe(true);
+    tree.deleteItem(value);
+    expect(tree.includes(value)).toBe(false);
+  })
+  test("insert after largest node value", () => {
+    const value = 9;
+
+    expect(tree.includes(value)).toBe(true);
+    tree.deleteItem(value);
+    expect(tree.includes(value)).toBe(false);
+  })
+})

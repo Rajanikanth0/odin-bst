@@ -55,6 +55,18 @@ class Tree {
 
     return root;
   }
+
+  deleteItem(value) {
+    let current = this.root;
+    let parent = null;
+
+    while (current) {
+      parent = current;
+      current = (value < current.data) ? current.left : current.right;
+
+      if (current.data === value) break;
+    }
+  }
 }
 
 export default Tree;
