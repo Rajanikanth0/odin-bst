@@ -40,7 +40,25 @@ class Tree {
     return false;
   }
 
-  insert(value) {}
+  insert(value) {
+    const newNode = new Node(value);
+    
+    if (!this.root) {
+      this.root = newNode;
+      return;
+    }
+
+    let current = this.root;
+    let parent = null;
+
+    while(current) {
+      parent = current;
+      current = (current.data > value) ? current.left : current.right;
+    }
+
+    if (value < parent.data) parent.left = newNode;
+    else parent.right = newNode;
+  }
 }
 
 export default Tree;
