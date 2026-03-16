@@ -40,24 +40,20 @@ class Tree {
     return false;
   }
 
-  insert(value) {
-    const newNode = new Node(value);
-    
-    if (!this.root) {
-      this.root = newNode;
-      return;
+  insert(value, root = this.root) {
+    if (!root) {
+      const newNode = new Node(value);
+      if (!this.root) this.root = newNode;
+      return newNode;
     }
 
-    let current = this.root;
-    let parent = null;
-
-    while(current) {
-      parent = current;
-      current = (current.data > value) ? current.left : current.right;
+    if (value < root.data) {
+      root.left = this.insert(value, root.left);
+    } else if (value > root.data) {
+      root.right = this.insert(value, root.right);
     }
 
-    if (value < parent.data) parent.left = newNode;
-    else parent.right = newNode;
+    return root;
   }
 }
 
