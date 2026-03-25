@@ -57,52 +57,34 @@ class Tree {
   }
 
   deleteItem(value) {
-    let current = this.root;
-    let parent = null;
+    this.root = fun(value, this.root);
 
-    while (current) {
-      if (current.data === value) break;
-      
-      parent = current;
-      current = (value < current.data) ? current.left : current.right;
-    }
-
-    if (!current) return;
-
-    let subCurrent = current.right;
-    let subParent = current;
-
-    // deletion of a leaf node
-    if (!subCurrent) {
-      if (value < parent.data) {
-        parent.left = current.left;
+    function fun(value, root) {
+      if (!root) return null;
+  
+      if (value < root.data) {
+        root.left = fun(value, root.left);
+      } else if (value > root.data) {
+        root.right = fun(value, root.right);
       } else {
-        parent.right = current.left;
+        if (!root.left) return root.right;
+        if (!root.right) return root.left;
+
+        root.data = getMin(root.right);
+        root.right = fun(root.data, root.right);
       }
-      return;
+  
+      return root;
     }
 
-    while(subCurrent.left) {
-      subParent = subCurrent;
-      subCurrent = subCurrent.left;
+    function getMin(node) {
+      let min = node.data;
+      while (node.left) {
+        min = node.left.data;
+        node = node.left;
+      }
+      return min;
     }
-
-    // deletion of a parent node with one child node
-    if (subParent.data === current.data) {
-      parent.right = subCurrent;
-      subCurrent.left = current.left;
-      return;
-    }
-    
-    if (parent) {
-      parent.right = subCurrent;
-    } else {
-      this.root = subCurrent;
-    }
-
-    subParent.left = subCurrent.right;
-    subCurrent.left = current.left;
-    subCurrent.right = current.right;
   }
 }
 

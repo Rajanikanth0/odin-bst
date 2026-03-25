@@ -53,7 +53,7 @@ describe("insert method", () => {
   })
 })
 
-describe.only("deleteItem method", () => {
+describe("deleteItem method", () => {
   test.skip("value already exists!", () => {});
   test("deletion of a leaf node", () => {
     const value = 1;
@@ -81,7 +81,6 @@ describe.only("deleteItem method", () => {
     
     expect(tree.includes(value)).toBe(true);
     tree.deleteItem(value);
-    console.log(tree.root);
     expect(tree.includes(value)).toBe(false);
   })
 })
