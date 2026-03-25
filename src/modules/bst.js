@@ -61,11 +61,48 @@ class Tree {
     let parent = null;
 
     while (current) {
+      if (current.data === value) break;
+      
       parent = current;
       current = (value < current.data) ? current.left : current.right;
-
-      if (current.data === value) break;
     }
+
+    if (!current) return;
+
+    let subCurrent = current.right;
+    let subParent = current;
+
+    // deletion of a leaf node
+    if (!subCurrent) {
+      if (value < parent.data) {
+        parent.left = current.left;
+      } else {
+        parent.right = current.left;
+      }
+      return;
+    }
+
+    while(subCurrent.left) {
+      subParent = subCurrent;
+      subCurrent = subCurrent.left;
+    }
+
+    // deletion of a parent node with one child node
+    if (subParent.data === current.data) {
+      parent.right = subCurrent;
+      subCurrent.left = current.left;
+      return;
+    }
+    
+    if (parent) {
+      parent.right = subCurrent;
+    } else {
+      this.root = subCurrent;
+    }
+
+    subParent.left = subCurrent.right;
+    subCurrent.left = current.left;
+    subCurrent.right = current.right;
   }
 }
 
