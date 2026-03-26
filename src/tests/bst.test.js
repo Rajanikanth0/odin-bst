@@ -55,37 +55,36 @@ describe("insert method", () => {
 
 describe("deleteItem method", () => {
   test.skip("value already exists!", () => {});
-  test("deletion of a leaf node", () => {
-    const value = 1;
+  test("deletion of a leaf node (1)", () => {
+    tree.deleteItem(1);
     
-    expect(tree.includes(value)).toBe(true);
-    tree.deleteItem(value);
-    expect(tree.includes(value)).toBe(false);
+    expect(tree.includes(1)).toBe(false);
+    expect(tree.includes(2)).toBe(true);
   })
-  test("deletion of a node with one child node", () => {
-    const value = 8;
+  test("deletion of a node with one child (8)", () => {
+    tree.deleteItem(8);
     
-    expect(tree.includes(value)).toBe(true);
-    tree.deleteItem(value);
-    expect(tree.includes(value)).toBe(false);
+    expect(tree.includes(8)).toBe(false);
+    expect(tree.includes(9)).toBe(true);
   })
-  test("deletion of a node with two child nodes", () => {
-    const value = 7;
+  test("deletion of a node with two children (7)", () => {
+    tree.deleteItem(7);
     
-    expect(tree.includes(value)).toBe(true);
-    tree.deleteItem(value);
-    expect(tree.includes(value)).toBe(false);
+    expect(tree.includes(7)).toBe(false);
+    expect(tree.includes(8)).toBe(true);
   })
-  test("deletion of root node", () => {
-    const value = 5;
+  test("deletion of root node (5)", () => {
+    tree.deleteItem(5);
     
-    expect(tree.includes(value)).toBe(true);
-    tree.deleteItem(value);
-    expect(tree.includes(value)).toBe(false);
+    expect(tree.includes(5)).toBe(false);
+
+    expect(tree.root.data).not.toBe(5);
+    expect(tree.includes(3)).toBe(true);
+    expect(tree.includes(6)).toBe(true);
   })
 })
 
-describe.only("levelOrderForEach method", () => {
+describe("levelOrderForEach method", () => {
   test("throws error if callback is missing", () => {
     expect(() => tree.levelOrderForEach()).toThrow("callback is required!");
   })
