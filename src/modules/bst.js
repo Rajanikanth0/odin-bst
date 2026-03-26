@@ -104,6 +104,22 @@ class Tree {
       if (node.right) queue.push(node.right);
     }
   }
+
+  inOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("callback is required!");
+    }
+
+    fun(this.root);
+
+    function fun(root) {
+      if (!root) return;
+
+      fun(root.left);
+      callback(root.data);
+      fun(root.right);
+    }
+  }
 }
 
 export default Tree;

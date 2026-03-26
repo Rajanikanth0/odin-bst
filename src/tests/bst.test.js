@@ -1,15 +1,5 @@
 import Tree from "../modules/bst";
 
-const prettyPrint = (node, prefix = '', isLeft = true) => {
-  if (node === null || node === undefined) {
-    return;
-  }
-
-  prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
-  prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
-}
-
 let tree;
 beforeEach(() => {
   const array = [1, 2, 3, 5, 6, 7, 8, 9];
@@ -99,6 +89,25 @@ describe("levelOrderForEach method", () => {
 
     expect(mockFn).toHaveBeenNthCalledWith(1, 5);
     expect(mockFn).toHaveBeenNthCalledWith(4, 1);
+    expect(mockFn).toHaveBeenNthCalledWith(8, 9);
+  })
+})
+
+describe("inOrderForEach method", () => {
+  test("throws error if callback is missing", () => {
+    expect(() => tree.levelOrderForEach()).toThrow("callback is required!");
+  })
+  test("visits nodes in in-order (left-root-right)", () => {
+    const visited = [];
+    const mockFn = jest.fn(data => visited.push(data));
+
+    tree.inOrderForEach(mockFn);
+
+    expect(mockFn).toHaveBeenCalledTimes(8);
+    expect(visited).toEqual([1, 2, 3, 5, 6, 7, 8, 9]);
+
+    expect(mockFn).toHaveBeenNthCalledWith(1, 1);
+    expect(mockFn).toHaveBeenNthCalledWith(4, 5);
     expect(mockFn).toHaveBeenNthCalledWith(8, 9);
   })
 })
