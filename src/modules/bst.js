@@ -152,6 +152,39 @@ class Tree {
       callback(root.data);
     }
   }
+
+  height(value) {
+    let current = this.root;
+
+    while (current) {
+      if (value === current.data) break;
+      current = (value < current.data) ? current.left : current.right;
+    }
+
+    if (!current) return;
+    return fun(current);
+
+    function fun(node) {
+      if (!node) return -1;
+      if (!node.left && !node.right) return 0;
+
+      return 1 + Math.max(
+        fun(node.left),
+        fun(node.right)
+      )
+    }
+  }
+
+  depth(value) {
+    let current = this.root;
+    let count = 0;
+
+    while (current) {
+      if (value === current.data) return count;
+      current = (value < current.data) ? current.left : current.right;
+      count++;
+    }
+  }
 }
 
 export default Tree;

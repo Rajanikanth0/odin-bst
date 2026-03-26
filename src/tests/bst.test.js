@@ -149,3 +149,33 @@ describe("preOrderForEach method", () => {
     expect(mockFn).toHaveBeenNthCalledWith(8, 5);
   })
 })
+
+describe("height method", () => {
+  test("returns undefined if the value is missing", () => {
+    expect(tree.height(0)).toBeUndefined();
+  })
+  test("returns the height of the root node value (5)", () => {
+    expect(tree.height(5)).toBe(3);
+  })
+  test("returns the height of a mid node value (2)", () => {
+    expect(tree.height(2)).toBe(1);
+  })
+  test("returns the height of a leaf node value (9)", () => {
+    expect(tree.height(9)).toBe(0);
+  })
+})
+
+describe("depth method", () => {
+  test("returns undefined if the value is missing", () => {
+    expect(tree.depth(0)).toBeUndefined();
+  })
+  test("returns the depth of the root node value (5)", () => {
+    expect(tree.depth(5)).toBe(0);
+  })
+  test("returns the depth of a mid node value (2)", () => {
+    expect(tree.depth(2)).toBe(1);
+  })
+  test("returns the depth of a leaf node value (9)", () => {
+    expect(tree.depth(9)).toBe(3);
+  })
+})
