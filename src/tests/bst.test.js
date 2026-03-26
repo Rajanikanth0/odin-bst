@@ -84,3 +84,22 @@ describe("deleteItem method", () => {
     expect(tree.includes(value)).toBe(false);
   })
 })
+
+describe.only("levelOrderForEach method", () => {
+  test("throws error if callback is missing", () => {
+    expect(() => tree.levelOrderForEach()).toThrow("callback is required!");
+  })
+  test("visits nodes in breadth-first order (level by level)", () => {
+    const visited = [];
+    const mockFn = jest.fn(data => visited.push(data));
+
+    tree.levelOrderForEach(mockFn);
+
+    expect(mockFn).toHaveBeenCalledTimes(8);
+    expect(visited).toEqual([5, 2, 7, 1, 3, 6, 8, 9]);
+
+    expect(mockFn).toHaveBeenNthCalledWith(1, 5);
+    expect(mockFn).toHaveBeenNthCalledWith(4, 1);
+    expect(mockFn).toHaveBeenNthCalledWith(8, 9);
+  })
+})
