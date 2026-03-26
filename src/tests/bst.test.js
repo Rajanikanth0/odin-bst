@@ -111,3 +111,41 @@ describe("inOrderForEach method", () => {
     expect(mockFn).toHaveBeenNthCalledWith(8, 9);
   })
 })
+
+describe("preOrderForEach method", () => {
+  test("throws error if callback is missing", () => {
+    expect(() => tree.levelOrderForEach()).toThrow("callback is required!");
+  })
+  test("visits nodes in pre-order (root-left-right)", () => {
+    const visited = [];
+    const mockFn = jest.fn(data => visited.push(data));
+
+    tree.preOrderForEach(mockFn);
+
+    expect(mockFn).toHaveBeenCalledTimes(8);
+    expect(visited).toEqual([5, 2, 1, 3, 7, 6, 8, 9]);
+
+    expect(mockFn).toHaveBeenNthCalledWith(1, 5);
+    expect(mockFn).toHaveBeenNthCalledWith(4, 3);
+    expect(mockFn).toHaveBeenNthCalledWith(8, 9);
+  })
+})
+
+describe("preOrderForEach method", () => {
+  test("throws error if callback is missing", () => {
+    expect(() => tree.levelOrderForEach()).toThrow("callback is required!");
+  })
+  test("visits nodes in post-order (left-right-root)", () => {
+    const visited = [];
+    const mockFn = jest.fn(data => visited.push(data));
+
+    tree.postOrderForEach(mockFn);
+
+    expect(mockFn).toHaveBeenCalledTimes(8);
+    expect(visited).toEqual([1, 3, 2, 6, 9, 8, 7, 5]);
+
+    expect(mockFn).toHaveBeenNthCalledWith(1, 1);
+    expect(mockFn).toHaveBeenNthCalledWith(4, 6);
+    expect(mockFn).toHaveBeenNthCalledWith(8, 5);
+  })
+})

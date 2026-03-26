@@ -120,6 +120,38 @@ class Tree {
       fun(root.right);
     }
   }
+
+  preOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("callback is required!");
+    }
+
+    fun(this.root);
+
+    function fun(root) {
+      if (!root) return;
+
+      callback(root.data);
+      fun(root.left);
+      fun(root.right);
+    }
+  }
+
+  postOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("callback is required!");
+    }
+
+    fun(this.root);
+
+    function fun(root) {
+      if (!root) return;
+
+      fun(root.left);
+      fun(root.right);
+      callback(root.data);
+    }
+  }
 }
 
 export default Tree;
