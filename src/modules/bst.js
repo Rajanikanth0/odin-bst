@@ -19,7 +19,7 @@ class Tree {
     function fun(arr, start, end) {
       if (start > end) return null;
 
-      const mid = start + Math.floor((end - start) / 2);
+      const mid = Math.floor((start + end) / 2);
       const root = new Node( arr[mid] );
   
       root.left = fun(arr, start, mid-1);
