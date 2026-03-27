@@ -179,3 +179,14 @@ describe("depth method", () => {
     expect(tree.depth(9)).toBe(3);
   })
 })
+
+describe("isBalanced method", () => {
+  test("returns true if the tree is balanced", () => {
+    expect(tree.isBalanced()).toBe(true);
+  })
+
+  test("returns false for unbalanced tree", () => {
+    tree.insert(10);
+    expect(tree.isBalanced()).toBe(false);
+  })
+})

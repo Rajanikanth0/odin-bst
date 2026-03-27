@@ -162,16 +162,17 @@ class Tree {
     }
 
     if (!current) return;
+
     return fun(current);
 
     function fun(node) {
       if (!node) return -1;
       if (!node.left && !node.right) return 0;
 
-      return 1 + Math.max(
-        fun(node.left),
-        fun(node.right)
-      )
+      const leftHeight = fun(node.left);
+      const rightHeight = fun(node.right);
+
+      return 1 + Math.max(leftHeight, rightHeight);
     }
   }
 
@@ -183,6 +184,22 @@ class Tree {
       if (value === current.data) return count;
       current = (value < current.data) ? current.left : current.right;
       count++;
+    }
+  }
+
+  isBalanced() {
+    return fun(this.root) !== -1;
+
+    function fun(node) {
+      if (!node) return 0;
+
+      const leftHeight = fun(node.left);
+      const rightHeight = fun(node.right);
+
+      if (leftHeight === -1 || rightHeight === -1) return -1;
+      if (Math.abs(leftHeight - rightHeight) > 1) return -1;
+
+      return 1 + Math.max(leftHeight, rightHeight);
     }
   }
 }
