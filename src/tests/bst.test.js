@@ -190,3 +190,12 @@ describe("isBalanced method", () => {
     expect(tree.isBalanced()).toBe(false);
   })
 })
+
+describe("rebalance method", () => {
+  test("balances an unbalanced tree", () => {
+    tree.insert(10);
+    expect(tree.isBalanced()).toBe(false);
+    tree.rebalance();
+    expect(tree.isBalanced()).toBe(true);
+  });
+})

@@ -10,11 +10,11 @@ class Tree {
   constructor(array) {
     const set = new Set(array);
     this.arr = Array.from(set).sort((a, b) => a-b);
-    this.root = this.#buildTree(this.arr);
+    this.root = this.#buildTree();
   }
   
-  #buildTree() {
-    return fun(this.arr, 0, this.arr.length-1);
+  #buildTree(array = this.arr) {
+    return fun(array, 0, array.length-1);
     
     function fun(arr, start, end) {
       if (start > end) return null;
@@ -201,6 +201,12 @@ class Tree {
 
       return 1 + Math.max(leftHeight, rightHeight);
     }
+  }
+
+  rebalance() {
+    const temp = [];
+    this.inOrderForEach(value => temp.push(value));
+    this.root = this.#buildTree(temp);
   }
 }
 
